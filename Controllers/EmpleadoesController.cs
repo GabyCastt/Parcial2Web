@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GestionProyectoFINAL.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GestionProyectoFINAL.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class EmpleadoesController : Controller
     {
         private readonly GestionProyectosContext _context;
