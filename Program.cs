@@ -10,13 +10,12 @@ builder.Services.AddDbContext<GestionProyectosContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-// Configuración de Identity (SOLO UNA VEZ)
+// Configuración de Identity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => {
     options.SignIn.RequireConfirmedAccount = true;
-    // Otras configuraciones que necesites
 })
 .AddEntityFrameworkStores<GestionProyectosContext>()
-.AddDefaultUI() // Reemplaza AddDefaultIdentity
+.AddDefaultUI() 
 .AddDefaultTokenProviders();
 
 builder.Services.ConfigureApplicationCookie(options =>
@@ -25,7 +24,6 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = "/Identity/Account/AccessDenied";
 });
 
-// Añadir soporte para Razor Pages
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
 
@@ -44,7 +42,6 @@ using (var scope = app.Services.CreateScope())
     await InitialSetup.Initialize(scope.ServiceProvider);
 }
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
